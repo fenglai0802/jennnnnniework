@@ -3,7 +3,6 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
-
 module.exports = {
   devtool: 'eval-source-map',
   // devtool: 'cheap-module-eval-source-map',
@@ -29,11 +28,18 @@ module.exports = {
       ]
     },
     {
+      test: /\.css$/,
+      use: [
+        'style-loader',
+        'css-loader'
+      ]
+    },
+    {
       test: /\.scss$/,
       use: [
         'style-loader',
         'css-loader',
-        'scss-loader'
+        'sass-loader'
       ]
     },
     {
@@ -41,15 +47,32 @@ module.exports = {
       use: [
         'file-loader'
       ]
+    },
+    {
+      test: /\.(woff|woff2|eot|ttf|otf)$/,
+      use: [
+        'file-loader'
+      ]
+    },
+    {
+      test: /\.html$/,
+      use: [
+        'html-loader'
+      ]
     }
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
+    // new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       title: 'Output Management',
       template: `${__dirname}/src/index.tmpl.html`
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      Tether: 'tether'
+    })
   ]
 };

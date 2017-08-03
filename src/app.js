@@ -1,21 +1,21 @@
 import Regular from 'regularjs';
 import restate from 'regular-state';
 
+import 'bootstrap/dist/js/bootstrap.min.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import tmp from './app.html';
+import './main.scss';
+
 const App = Regular.extend({
-  template:
-     `<div>
-       <h2>主页</h2>
-       <div>
-         <a href='#/app/chat'>Go Chat</a>|
-         <a href='#/app/blog'>Go Blog</a>
-       </div>
-       <div r-view ></div>
-      </div>
-     `
+  template: tmp,
+  init() {
+  }
 });
 
 const routes = {
   app: {
+    url: '/',
     view: App
   }
   // 'app.blog': {
